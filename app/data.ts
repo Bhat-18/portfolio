@@ -5,7 +5,7 @@
 export const hero = {
     name: "Bhanuprakash Bhat",
     title: "Data Scientist & AI Engineer",
-    text: "Postgrad Student in Data Science & AI at USyd. Experienced in building ML pipelines, integrating AI into curriculum systems, and solving real-world aerospace problems.",
+    text: "I build production AI that drives ROI. Recently architected a Serverless GCP Agent saving ~$10.6k/year and I deploy scalable RAG & MLOps pipelines. I don't just train models—I ship reliable, money-saving software.",
     avatar: "/avatar.jpg", 
     resume: "/resume.pdf", // Ensure you have a resume.pdf in public, or remove this line
 };

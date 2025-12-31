@@ -58,13 +58,21 @@ export default function Home() {
                   </p>
                   <div className="flex flex-wrap gap-4">
                       <a href="#projects" className="bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-gray-200 transition shadow-lg shadow-white/10">View Work</a>
-                      <a href={socialLinks.linkedin} target="_blank" className="border border-gray-700 text-white px-8 py-4 rounded-full font-bold hover:bg-gray-800 transition">Contact Me</a>
+                      
+                      {/* === UPDATED BUTTON: DOWNLOAD RESUME === */}
+                      <a 
+                        href="/resume.pdf" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="border border-gray-700 text-white px-8 py-4 rounded-full font-bold hover:bg-gray-800 transition"
+                      >
+                        Download CV
+                      </a>
                   </div>
               </div>
 
               {/* Right Column: PHOTO (Resized to Standard Portrait) */}
               <div className="order-1 md:order-2 flex justify-center md:justify-end relative">
-                  {/* CHANGED: Width restricted to max-w-sm (approx 380px) and Height to 450px */}
                   <div className="relative w-full max-w-[300px] md:max-w-[360px] h-[400px] md:h-[480px] rounded-3xl overflow-hidden border border-gray-800 shadow-2xl shadow-blue-900/20 rotate-3 hover:rotate-0 transition-all duration-500 group z-10 bg-gray-900">
                      <Image
                          src={hero.avatar}
