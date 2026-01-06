@@ -86,12 +86,14 @@ export const education = [
         degree: "Master's in Data Science and AI",
         school: "The University of Sydney",
         date: "2024 - 2026",
+        logo: "/usyd.png",
     },
     {
         id: 2,
         degree: "B.Tech in Aerospace Engineering",
         school: "MS Ramaiah University",
         date: "2020 - 2024",
+        logo: "/msruas.png",
     }
 ];
 

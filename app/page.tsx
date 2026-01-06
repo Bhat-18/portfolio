@@ -1,17 +1,50 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { FiGithub, FiLinkedin, FiMail, FiExternalLink, FiBriefcase } from "react-icons/fi";
+import { useState } from "react";
+import { FiGithub, FiLinkedin, FiMail, FiExternalLink, FiBriefcase, FiX, FiZoomIn, FiAward } from "react-icons/fi";
+// Import FaGraduationCap as a fallback icon if a logo is missing
+import { FaGraduationCap } from "react-icons/fa6";
 import { hero, navLinks, socialLinks, projects, experience, education, skills, certifications } from "./data";
 import { TechIcon } from "./components/TechIcon";
 
 export default function Home() {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   return (
-    <main className="min-h-screen font-sans selection:bg-blue-500/30 pb-20 overflow-x-hidden">
+    <main className="min-h-screen font-sans selection:bg-blue-500/30 pb-20 overflow-x-hidden relative">
       
+      {/* === IMAGE POPUP (MODAL) === */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 transition-all duration-300"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button 
+            className="absolute top-6 right-6 text-white text-4xl hover:text-red-400 transition"
+            onClick={() => setSelectedImage(null)}
+          >
+            <FiX />
+          </button>
+          
+          <div 
+            className="relative w-full max-w-4xl h-[80vh] rounded-xl overflow-hidden shadow-2xl shadow-blue-500/20 border border-gray-800"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Image 
+              src={selectedImage} 
+              alt="Preview" 
+              fill 
+              className="object-contain" 
+            />
+          </div>
+        </div>
+      )}
+
       {/* NAVBAR */}
       <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl bg-black/60 backdrop-blur-md border border-gray-800 rounded-full px-6 py-3 flex items-center justify-between shadow-lg shadow-black/20">
         <div className="flex items-center gap-4">
-          {/* Small nav avatar hidden on mobile since big one is below */}
           <div className="hidden md:block w-10 h-10 rounded-full bg-gray-700 overflow-hidden relative border border-gray-600">
              <Image 
                src={hero.avatar} 
@@ -42,12 +75,11 @@ export default function Home() {
 
       <div className="max-w-6xl mx-auto px-6 flex flex-col gap-32">
         
-        {/* === HERO SECTION (Adjusted Size) === */}
+        {/* HERO */}
         <section className="min-h-[85vh] flex items-center pt-28 md:pt-0 relative">
             <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/20 blur-[120px] rounded-full -z-10 hidden md:block"></div>
 
             <div className="grid md:grid-cols-2 gap-12 items-center w-full">
-              {/* Left Column: Text */}
               <div className="flex flex-col justify-center order-2 md:order-1">
                   <span className="text-blue-400 font-medium mb-4 block tracking-wider">Hello, I'm</span>
                   <h1 className="text-5xl md:text-7xl font-extrabold bg-gradient-to-br from-white via-gray-200 to-gray-500 bg-clip-text text-transparent mb-6 leading-tight">
@@ -58,20 +90,10 @@ export default function Home() {
                   </p>
                   <div className="flex flex-wrap gap-4">
                       <a href="#projects" className="bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-gray-200 transition shadow-lg shadow-white/10">View Work</a>
-                      
-                      {/* === UPDATED BUTTON: DOWNLOAD RESUME === */}
-                      <a 
-                        href="/resume.pdf" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="border border-gray-700 text-white px-8 py-4 rounded-full font-bold hover:bg-gray-800 transition"
-                      >
-                        Download CV
-                      </a>
+                      <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="border border-gray-700 text-white px-8 py-4 rounded-full font-bold hover:bg-gray-800 transition">Download CV</a>
                   </div>
               </div>
 
-              {/* Right Column: PHOTO (Resized to Standard Portrait) */}
               <div className="order-1 md:order-2 flex justify-center md:justify-end relative">
                   <div className="relative w-full max-w-[300px] md:max-w-[360px] h-[400px] md:h-[480px] rounded-3xl overflow-hidden border border-gray-800 shadow-2xl shadow-blue-900/20 rotate-3 hover:rotate-0 transition-all duration-500 group z-10 bg-gray-900">
                      <Image
@@ -83,12 +105,10 @@ export default function Home() {
                      />
                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent mix-blend-overlay"></div>
                   </div>
-                  {/* Decorative border matched to new size */}
                   <div className="absolute inset-0 w-full max-w-[300px] md:max-w-[360px] h-[400px] md:h-[480px] rounded-3xl border-2 border-blue-500/30 -rotate-3 -z-10 scale-105 md:left-auto md:right-0"></div>
               </div>
             </div>
         </section>
-
 
         {/* PROJECTS */}
         <section id="projects">
@@ -121,9 +141,16 @@ export default function Home() {
                    </div>
                   </div>
                 </div>
-                <div className="md:col-span-2 h-64 md:h-auto relative rounded-2xl overflow-hidden border border-gray-800 group-hover:border-blue-500/30 transition z-10 bg-gray-950 order-1 md:order-2">
+                <div className="md:col-span-2 h-64 md:h-auto relative rounded-2xl overflow-hidden border border-gray-800 group-hover:border-blue-500/30 transition z-10 bg-gray-950 order-1 md:order-2 cursor-pointer"
+                     onClick={() => project.image && setSelectedImage(project.image)}
+                >
                   {project.image ? (
-                      <Image src={project.image} alt={project.title} fill className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition duration-500" />
+                      <div className="w-full h-full relative">
+                        <Image src={project.image} alt={project.title} fill className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition duration-500" />
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300">
+                             <FiZoomIn className="text-white text-4xl" />
+                        </div>
+                      </div>
                   ) : (
                       <div className="w-full h-full flex items-center justify-center text-gray-500 text-xs">No Image Found</div>
                   )}
@@ -172,42 +199,64 @@ export default function Home() {
 
         {/* EDUCATION & CERTS */}
         <section id="education" className="grid md:grid-cols-2 gap-16 pb-20">
+            {/* EDUCATION COLUMN - UPDATED WITH LOGOS */}
             <div>
                 <h2 className="text-4xl font-bold mb-10 flex items-center gap-3">
                     <span className="text-green-400">/</span> Education
                 </h2>
                 <div className="space-y-6">
                     {education.map((edu) => (
-                        <div key={edu.id} className="p-8 rounded-3xl border border-gray-800 bg-gray-900/20 hover:border-green-500/50 transition shadow-md group">
-                            <h3 className="text-xl font-bold mb-2 group-hover:text-green-400 transition">{edu.degree}</h3>
-                            <p className="text-gray-300 text-lg mb-4">{edu.school}</p>
-                            <span className="text-sm font-bold text-green-300 bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20">{edu.date}</span>
+                        <div key={edu.id} className="flex items-center gap-6 p-6 rounded-3xl border border-gray-800 bg-gray-900/20 hover:border-green-500/50 hover:bg-gray-800/80 transition shadow-md group">
+                            {/* Logo Container */}
+                            <div className="relative w-16 h-16 shrink-0 rounded-2xl overflow-hidden bg-gray-800 border border-gray-700 p-1 flex items-center justify-center">
+                                {edu.logo ? (
+                                    <Image src={edu.logo} alt={edu.school} fill className="object-contain rounded-xl" />
+                                ) : (
+                                    // Fallback icon if you haven't added the image yet
+                                    <FaGraduationCap className="text-green-500 text-3xl" />
+                                )}
+                            </div>
+                            {/* Text Container */}
+                            <div>
+                              <h3 className="text-xl font-bold mb-1 text-white group-hover:text-green-400 transition">{edu.degree}</h3>
+                              <p className="text-gray-300 text-base mb-3">{edu.school}</p>
+                              <span className="text-sm font-bold text-green-300 bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20 inline-block">{edu.date}</span>
+                            </div>
                         </div>
                     ))}
                 </div>
             </div>
 
+            {/* CERTIFICATES COLUMN */}
             <div id="certificates">
                 <h2 className="text-4xl font-bold mb-10 flex items-center gap-3">
                     <span className="text-green-400">/</span> Certifications
                 </h2>
                 <div className="space-y-4">
                     {certifications.map((cert) => (
-                        <a href={cert.link} target="_blank" key={cert.id} className="flex items-center gap-6 p-4 rounded-3xl border border-gray-800 bg-gray-900/20 hover:border-green-500/50 hover:bg-gray-900/50 transition group shadow-md relative top-0 hover:-top-1">
+                        <div 
+                            key={cert.id} 
+                            // CLICK HANDLER: This makes the popup work!
+                            onClick={() => cert.image && setSelectedImage(cert.image)}
+                            className="flex items-center gap-6 p-4 rounded-3xl border border-gray-800 bg-gray-900/20 hover:border-green-500/50 hover:bg-gray-800/80 transition group shadow-md cursor-pointer relative top-0 hover:-top-1"
+                        >
                             <div className="relative w-16 h-16 shrink-0 rounded-2xl overflow-hidden bg-gray-800 border border-gray-700 p-1">
                                 {cert.image ? (
                                     <Image src={cert.image} alt={cert.title} fill className="object-contain rounded-xl" />
                                 ) : (
-                                    <div className="w-full h-full bg-gray-700"></div>
+                                    <div className="w-full h-full flex items-center justify-center bg-gray-800 text-green-500"><FiAward size={24}/></div>
                                 )}
                             </div>
-                            <div>
-                                <h3 className="text-base font-bold group-hover:text-green-400 transition line-clamp-1 pr-8">{cert.title}</h3>
+                            <div className="flex-1">
+                                <h3 className="text-base font-bold text-gray-200 group-hover:text-green-400 transition line-clamp-1 pr-8">{cert.title}</h3>
                                 <p className="text-sm text-gray-400">{cert.issuer}</p>
                                 <span className="text-xs text-gray-500 mt-1 block">{cert.date}</span>
                             </div>
-                            <FiExternalLink className="absolute top-6 right-6 text-gray-600 group-hover:text-green-400 transition" />
-                        </a>
+                            {/* Zoom Icon to indicate clickability */}
+                            <div className="absolute top-6 right-6 text-gray-600 group-hover:text-green-400 transition">
+                                <FiZoomIn size={20} />
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>
