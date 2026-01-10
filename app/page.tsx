@@ -4,56 +4,82 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { FiGithub, FiLinkedin, FiMail, FiExternalLink, FiBriefcase, FiX, FiZoomIn, FiAward } from "react-icons/fi";
-// Import FaGraduationCap as a fallback icon if a logo is missing
 import { FaGraduationCap } from "react-icons/fa6";
 import { hero, navLinks, socialLinks, projects, experience, education, skills, certifications } from "./data";
 import { TechIcon } from "./components/TechIcon";
+// IMPORT ANIMATION LIBRARY
+import { motion, AnimatePresence } from "framer-motion";
+import Spotlight from "./components/Spotlight";
+
+// Animation Variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
 
 export default function Home() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
-    <main className="min-h-screen font-sans selection:bg-blue-500/30 pb-20 overflow-x-hidden relative">
+    <main className="min-h-screen font-sans selection:bg-blue-500/30 pb-20 overflow-x-hidden relative bg-black text-gray-200">
       
-      {/* === IMAGE POPUP (MODAL) === */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 transition-all duration-300"
-          onClick={() => setSelectedImage(null)}
-        >
-          <button 
-            className="absolute top-6 right-6 text-white text-4xl hover:text-red-400 transition"
+      {/* 1. REAL-TIME MOUSE SPOTLIGHT */}
+      <Spotlight />
+
+      {/* IMAGE POPUP (MODAL) */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
             onClick={() => setSelectedImage(null)}
           >
-            <FiX />
-          </button>
-          
-          <div 
-            className="relative w-full max-w-4xl h-[80vh] rounded-xl overflow-hidden shadow-2xl shadow-blue-500/20 border border-gray-800"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Image 
-              src={selectedImage} 
-              alt="Preview" 
-              fill 
-              className="object-contain" 
-            />
-          </div>
-        </div>
-      )}
+            <button className="absolute top-6 right-6 text-white text-4xl hover:text-red-400 transition z-50">
+              <FiX />
+            </button>
+            
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="relative w-full max-w-5xl h-[85vh] rounded-xl overflow-hidden shadow-2xl shadow-blue-500/20 border border-gray-800 bg-black"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image 
+                src={selectedImage} 
+                alt="Preview" 
+                fill 
+                className="object-contain" 
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* NAVBAR */}
-      <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl bg-black/60 backdrop-blur-md border border-gray-800 rounded-full px-6 py-3 flex items-center justify-between shadow-lg shadow-black/20">
+      <motion.header 
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl bg-black/60 backdrop-blur-md border border-gray-800 rounded-full px-6 py-3 flex items-center justify-between shadow-lg shadow-black/20"
+      >
         <div className="flex items-center gap-4">
           <div className="hidden md:block w-10 h-10 rounded-full bg-gray-700 overflow-hidden relative border border-gray-600">
-             <Image 
-               src={hero.avatar} 
-               alt="Profile" 
-               fill 
-               className="object-cover" 
-             />
+             <Image src={hero.avatar} alt="Profile" fill className="object-cover" />
           </div>
-          <span className="font-bold text-lg tracking-tight">{hero.name}</span>
+          <span className="font-bold text-lg tracking-tight text-white">{hero.name}</span>
         </div>
 
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-300">
@@ -71,30 +97,46 @@ export default function Home() {
             <a href={socialLinks.email} className="hover:text-white text-xl transition"><FiMail /></a>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       <div className="max-w-6xl mx-auto px-6 flex flex-col gap-32">
         
-        {/* HERO */}
-        <section className="min-h-[85vh] flex items-center pt-28 md:pt-0 relative">
+        {/* HERO SECTION */}
+        <section className="min-h-[90vh] flex items-center pt-28 md:pt-0 relative">
+            {/* Background Glow */}
             <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/20 blur-[120px] rounded-full -z-10 hidden md:block"></div>
 
             <div className="grid md:grid-cols-2 gap-12 items-center w-full">
-              <div className="flex flex-col justify-center order-2 md:order-1">
-                  <span className="text-blue-400 font-medium mb-4 block tracking-wider">Hello, I'm</span>
-                  <h1 className="text-5xl md:text-7xl font-extrabold bg-gradient-to-br from-white via-gray-200 to-gray-500 bg-clip-text text-transparent mb-6 leading-tight">
+              {/* Left Column: Text */}
+              <motion.div 
+                initial="hidden"
+                animate="visible"
+                variants={staggerContainer}
+                className="flex flex-col justify-center order-2 md:order-1"
+              >
+                  <motion.span variants={fadeInUp} className="text-blue-400 font-medium mb-4 block tracking-wider">Hello, I'm</motion.span>
+                  
+                  <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-extrabold bg-gradient-to-br from-white via-gray-200 to-gray-500 bg-clip-text text-transparent mb-6 leading-tight">
                     {hero.title}
-                  </h1>
-                  <p className="text-lg md:text-xl text-gray-400 max-w-xl leading-relaxed mb-8">
+                  </motion.h1>
+                  
+                  <motion.p variants={fadeInUp} className="text-lg md:text-xl text-gray-400 max-w-xl leading-relaxed mb-8">
                     {hero.text}
-                  </p>
-                  <div className="flex flex-wrap gap-4">
+                  </motion.p>
+                  
+                  <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
                       <a href="#projects" className="bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-gray-200 transition shadow-lg shadow-white/10">View Work</a>
                       <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="border border-gray-700 text-white px-8 py-4 rounded-full font-bold hover:bg-gray-800 transition">Download CV</a>
-                  </div>
-              </div>
+                  </motion.div>
+              </motion.div>
 
-              <div className="order-1 md:order-2 flex justify-center md:justify-end relative">
+              {/* Right Column: Animated Photo */}
+              <motion.div 
+                 initial={{ opacity: 0, scale: 0.8, rotate: 10 }}
+                 animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                 transition={{ duration: 1, ease: "easeOut" }}
+                 className="order-1 md:order-2 flex justify-center md:justify-end relative"
+              >
                   <div className="relative w-full max-w-[300px] md:max-w-[360px] h-[400px] md:h-[480px] rounded-3xl overflow-hidden border border-gray-800 shadow-2xl shadow-blue-900/20 rotate-3 hover:rotate-0 transition-all duration-500 group z-10 bg-gray-900">
                      <Image
                          src={hero.avatar}
@@ -105,19 +147,33 @@ export default function Home() {
                      />
                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent mix-blend-overlay"></div>
                   </div>
-                  <div className="absolute inset-0 w-full max-w-[300px] md:max-w-[360px] h-[400px] md:h-[480px] rounded-3xl border-2 border-blue-500/30 -rotate-3 -z-10 scale-105 md:left-auto md:right-0"></div>
-              </div>
+                  <div className="absolute inset-0 w-full max-w-[300px] md:max-w-[360px] h-[400px] md:h-[480px] rounded-3xl border-2 border-blue-500/30 -rotate-3 -z-10 scale-105 md:left-auto md:right-0 animate-pulse"></div>
+              </motion.div>
             </div>
         </section>
 
         {/* PROJECTS */}
         <section id="projects">
-          <h2 className="text-4xl font-bold mb-12 flex items-center gap-3">
+          <motion.h2 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl font-bold mb-12 flex items-center gap-3"
+          >
             <span className="text-blue-400">/</span> Featured Projects
-          </h2>
+          </motion.h2>
+
           <div className="flex flex-col gap-12">
-            {projects.map((project) => (
-              <div key={project.id} className="group bg-gray-900/30 border border-gray-800/80 p-8 rounded-3xl grid md:grid-cols-5 gap-8 hover:border-blue-500/50 hover:bg-gray-900/60 transition-all duration-300 relative overflow-hidden shadow-lg">
+            {projects.map((project, index) => (
+              <motion.div 
+                key={project.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="group bg-gray-900/30 border border-gray-800/80 p-8 rounded-3xl grid md:grid-cols-5 gap-8 hover:border-blue-500/50 hover:bg-gray-900/60 transition-all duration-300 relative overflow-hidden shadow-lg"
+              >
                 <div className="md:col-span-3 flex flex-col justify-between z-10 relative order-2 md:order-1">
                   <div>
                     <div className="flex justify-between items-start mb-4">
@@ -141,8 +197,9 @@ export default function Home() {
                    </div>
                   </div>
                 </div>
-                <div className="md:col-span-2 h-64 md:h-auto relative rounded-2xl overflow-hidden border border-gray-800 group-hover:border-blue-500/30 transition z-10 bg-gray-950 order-1 md:order-2 cursor-pointer"
-                     onClick={() => project.image && setSelectedImage(project.image)}
+                <div 
+                   className="md:col-span-2 h-64 md:h-auto relative rounded-2xl overflow-hidden border border-gray-800 group-hover:border-blue-500/30 transition z-10 bg-gray-950 order-1 md:order-2 cursor-pointer"
+                   onClick={() => project.image && setSelectedImage(project.image)}
                 >
                   {project.image ? (
                       <div className="w-full h-full relative">
@@ -155,19 +212,31 @@ export default function Home() {
                       <div className="w-full h-full flex items-center justify-center text-gray-500 text-xs">No Image Found</div>
                   )}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
 
         {/* EXPERIENCE */}
         <section id="experience">
-            <h2 className="text-4xl font-bold mb-12 flex items-center gap-3">
+            <motion.h2 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl font-bold mb-12 flex items-center gap-3"
+            >
                 <span className="text-blue-400">/</span> Work Experience
-            </h2>
+            </motion.h2>
             <div className="relative border-l-2 border-gray-800 ml-3 space-y-16">
-                {experience.map((job) => (
-                    <div key={job.id} className="ml-12 relative group">
+                {experience.map((job, index) => (
+                    <motion.div 
+                      key={job.id} 
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className="ml-12 relative group"
+                    >
                         <span className="absolute -left-[59px] top-2 bg-black w-7 h-7 rounded-full border-[3px] border-blue-500 group-hover:scale-125 transition"></span>
                         <div className="bg-gray-900/30 p-8 rounded-3xl border border-gray-800 hover:border-blue-500/50 transition shadow-lg">
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
@@ -177,66 +246,99 @@ export default function Home() {
                             <p className="text-lg text-gray-300 font-medium mb-6 flex items-center gap-2"><FiBriefcase className="text-blue-400" /> {job.company}</p>
                             <p className="text-gray-400 text-base leading-relaxed">{job.description}</p>
                         </div>
-                    </div>
+                    </motion.div>
                 ))}
             </div>
         </section>
 
         {/* SKILLS */}
         <section id="skills">
-          <h2 className="text-4xl font-bold mb-12 flex items-center gap-3">
+          <motion.h2 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl font-bold mb-12 flex items-center gap-3"
+          >
              <span className="text-purple-400">/</span> Technologies & Skills
-          </h2>
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6">
+          </motion.h2>
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            variants={staggerContainer}
+            viewport={{ once: true }}
+            className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6"
+          >
               {skills.map((skill) => (
-                  <div key={skill} className="flex flex-col items-center gap-4 p-6 rounded-3xl border border-gray-800 bg-gray-900/20 hover:bg-gray-800/80 hover:border-purple-500/50 transition-all group hover:-translate-y-1 shadow-md">
+                  <motion.div 
+                    key={skill} 
+                    variants={fadeInUp}
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    className="flex flex-col items-center gap-4 p-6 rounded-3xl border border-gray-800 bg-gray-900/20 hover:bg-gray-800/80 hover:border-purple-500/50 transition-all group shadow-md"
+                  >
                       <TechIcon name={skill} size={40} />
                       <span className="text-sm font-bold text-gray-400 group-hover:text-white">{skill}</span>
-                  </div>
+                  </motion.div>
               ))}
-          </div>
+          </motion.div>
         </section>
 
         {/* EDUCATION & CERTS */}
         <section id="education" className="grid md:grid-cols-2 gap-16 pb-20">
-            {/* EDUCATION COLUMN - UPDATED WITH LOGOS */}
+            {/* EDUCATION COLUMN */}
             <div>
-                <h2 className="text-4xl font-bold mb-10 flex items-center gap-3">
+                <motion.h2 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="text-4xl font-bold mb-10 flex items-center gap-3"
+                >
                     <span className="text-green-400">/</span> Education
-                </h2>
+                </motion.h2>
                 <div className="space-y-6">
-                    {education.map((edu) => (
-                        <div key={edu.id} className="flex items-center gap-6 p-6 rounded-3xl border border-gray-800 bg-gray-900/20 hover:border-green-500/50 hover:bg-gray-800/80 transition shadow-md group">
-                            {/* Logo Container */}
+                    {education.map((edu, index) => (
+                        <motion.div 
+                          key={edu.id} 
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                          viewport={{ once: true }}
+                          className="flex items-center gap-6 p-6 rounded-3xl border border-gray-800 bg-gray-900/20 hover:border-green-500/50 hover:bg-gray-800/80 transition shadow-md group"
+                        >
                             <div className="relative w-16 h-16 shrink-0 rounded-2xl overflow-hidden bg-gray-800 border border-gray-700 p-1 flex items-center justify-center">
                                 {edu.logo ? (
                                     <Image src={edu.logo} alt={edu.school} fill className="object-contain rounded-xl" />
                                 ) : (
-                                    // Fallback icon if you haven't added the image yet
                                     <FaGraduationCap className="text-green-500 text-3xl" />
                                 )}
                             </div>
-                            {/* Text Container */}
                             <div>
                               <h3 className="text-xl font-bold mb-1 text-white group-hover:text-green-400 transition">{edu.degree}</h3>
                               <p className="text-gray-300 text-base mb-3">{edu.school}</p>
                               <span className="text-sm font-bold text-green-300 bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20 inline-block">{edu.date}</span>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
 
             {/* CERTIFICATES COLUMN */}
             <div id="certificates">
-                <h2 className="text-4xl font-bold mb-10 flex items-center gap-3">
+                <motion.h2 
+                   initial={{ opacity: 0, y: 20 }}
+                   whileInView={{ opacity: 1, y: 0 }}
+                   viewport={{ once: true }}
+                   className="text-4xl font-bold mb-10 flex items-center gap-3"
+                >
                     <span className="text-green-400">/</span> Certifications
-                </h2>
+                </motion.h2>
                 <div className="space-y-4">
-                    {certifications.map((cert) => (
-                        <div 
+                    {certifications.map((cert, index) => (
+                        <motion.div 
                             key={cert.id} 
-                            // CLICK HANDLER: This makes the popup work!
+                            initial={{ opacity: 0, x: 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.05 }}
+                            viewport={{ once: true }}
                             onClick={() => cert.image && setSelectedImage(cert.image)}
                             className="flex items-center gap-6 p-4 rounded-3xl border border-gray-800 bg-gray-900/20 hover:border-green-500/50 hover:bg-gray-800/80 transition group shadow-md cursor-pointer relative top-0 hover:-top-1"
                         >
@@ -252,11 +354,10 @@ export default function Home() {
                                 <p className="text-sm text-gray-400">{cert.issuer}</p>
                                 <span className="text-xs text-gray-500 mt-1 block">{cert.date}</span>
                             </div>
-                            {/* Zoom Icon to indicate clickability */}
                             <div className="absolute top-6 right-6 text-gray-600 group-hover:text-green-400 transition">
                                 <FiZoomIn size={20} />
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
