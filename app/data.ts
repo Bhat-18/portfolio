@@ -26,33 +26,48 @@ export const projects = [
   {
     id: 1,
     title: "Serverless AI Triage Agent",
-    description: "Architected a scalable AI agent on GCP using Docker and Python. Reduced support ticket response time by 40% and saved ~$10.6k annually in operational costs.",
-    stack: ["Python", "GCP", "Docker", "LLMs"],
-    link: "https://github.com/Bhat-18",
-    image: "/projects/inbox.png",
-    video: "", // <--- PUT YOUR VIDEO FILENAME HERE (e.g., "/videos/demo.mp4")
+    description: "Architected a scalable AI agent on GCP using Docker and Python. Integrated OpenAI (GPT-4o) to automate 100% of manual email triage, reducing response times by 40% and saving ~$10.6k annually in operational costs.",
+    stack: ["Python", "GCP", "Docker", "OpenAI"],
     status: "Production",
+    image: "/projects/inbox.png", // Ensure you have an image or remove this line to show preview text
+    link: "https://github.com/Bhat-18/smart-inbox-router",
   },
   {
     id: 2,
-    title: "Autonomous RAG Compliance Agent: Australian Innovation Auditor",
-    description: "Engineered an autonomous agent to audit R&D Tax, EMDG, and ESIC claims, reducing preliminary legal assessment costs by ~95% (projected savings of $50,000+ annually in external consulting fees).",
-    stack: ["LangChain", "OpenAI", "LangGraph", "Python"],
-    link: "https://github.com/Bhat-18",
+    title: "Australian Innovation Auditor",
+    description: "Engineered an autonomous RAG agent to audit R&D Tax and EMDG claims. Utilized LangGraph and ChromaDB for hybrid search, reducing preliminary legal assessment costs by ~95% (projected $50k+ savings).",
+    stack: ["LangChain", "LangGraph", "ChromaDB", "Python"],
+    status: "Production",
     image: "/projects/RAG.png",
-    video: "", 
-    status: "Prototype",
+    link: "https://github.com/Bhat-18/auto-auditor-rag-agent",
   },
   {
     id: 3,
-    title: "Retail Analytics Dashboard",
-    description: "Forecasting inventory demand using Prophet and visualizing data with Streamlit.",
-    stack: ["Python", "Pandas", "Streamlit"],
-    link: "https://github.com/Bhat-18",
+    title: "ASX Real-time Stock Signal System",
+    description: "Designed an end-to-end ML pipeline for financial signal prediction using a TensorFlow CNN1D model. Deployed via FastAPI with a Streamlit dashboard for real-time visualization of market data.",
+    stack: ["FastAPI", "TensorFlow", "Streamlit", "Python", "Docker"],
+    status: "Production",
+    image: "/projects/stock.png",
+    // No image? It will show "Preview Loading" or you can add one later
+    link: "https://github.com/Bhat-18/ASX-Real-time-Stock-Signal-Prediction-System-FastAPI-TensorFlow-Streamlit-",
+  },
+  {
+    id: 4,
+    title: "RetailBoost: Sales Forecasting",
+    description: "Developed a full-stack ML solution to forecast daily retail store sales. Implemented Random Forests with SHAP for model explainability and visualized insights on an interactive Streamlit dashboard.",
+    stack: ["Python", "Scikit-learn", "Streamlit", "Pandas"],
+    status: "Completed",
     image: "/projects/retail.png",
-    video: "",
-    status: "Live",
-  }
+    link: "https://github.com/Bhat-18/RetailBoost-Intelligent-Store-Sales-Forecasting-with-Explainable-Machine-Learning-and-Streamlit",
+  },
+  {
+    id: 5,
+    title: "Electricity Sector Data Pipeline",
+    description: "Built a spatial data engineering pipeline using DuckDB to integrate national electricity and emissions datasets. Performed geocoding and schema normalization for high-performance spatial analysis.",
+    stack: ["DuckDB", "Python", "SQL", "Matplotlib"],
+    status: "Completed",
+    link: "https://github.com/Bhat-18",
+  },
 ];
 
 export const experience = [
@@ -119,25 +134,57 @@ export const certifications = [
     id: 1,
     title: "AWS Certified AI Practitioner",
     issuer: "Amazon Web Services",
-    date: "Nov 2025",
-    link: "#",
-    image: "/certs/aws-ai.png", 
+    date: "2025",
+    image: "/certs/aws-ai.png",
+    link: "https://www.credly.com/badges/e8685a11-634f-41ee-9bbd-f834475439d6/linked_in_profile", // <--- UPDATE THIS
   },
   {
     id: 2,
-    title: "LangChain Essentials - Python",
-    issuer: "LangChain",
-    date: "Dec 2025",
-    link: "#",
-    image: "/certs/langchain.png", 
+    title: "Advanced RAG Applications with Vector Databases",
+    issuer: "LinkedIn Learning",
+    date: "2025",
+    image: "/certs/RAG.png",
+    link: "https://www.linkedin.com/learning/certificates/79ef14ca40abf0ee5a0d396211dcb5805c5b1e729452e3437de5b0c1531376d6", // <--- UPDATE THIS
   },
   {
     id: 3,
+    title: "Databricks Certified Data Engineer",
+    issuer: "Databricks",
+    date: "2025",
+    image: "/certs/databricks.png",
+    link: "https://customer-academy.databricks.com/learn/courses/2308/databricks-fundamentals-accreditation?hash=cc54a3c07e5ad92e6f2718b2d995501f8d3125c1&generated_by=1228377", // <--- UPDATE THIS
+  },
+  {
+    id: 4,
     title: "Advanced Learning Algorithms",
     issuer: "Stanford Online",
-    date: "Sep 2025",
-    link: "#",
-    image: "/certs/stanford.png", 
+    date: "2025",
+    image: "/certs/stanford.png",
+    link: "https://www.coursera.org/account/accomplishments/verify/BY66Y3USQLPN", // <--- UPDATE THIS
+  },
+  {
+    id: 5,
+    title: "LangChain Essentials: Python ",
+    issuer: "LangChain",
+    date: "2025",
+    image: "/certs/langchain.png",
+    link: "https://academy.langchain.com/certificates/hje8evmix6", // <--- UPDATE THIS
+  },
+  {
+    id: 6,
+    title: "Introduction to Docker",
+    issuer: "Docker Inc.",
+    date: "2025",
+    image: "/certs/docker.png",
+    link: "https://www.coursera.org/account/accomplishments/verify/7K1CJ2KWX2XP", // <--- UPDATE THIS
+  },
+  {
+    id: 7,
+    title: "Python Data Science Master Program",
+    issuer: "Besant Technologies",
+    date: "2024",
+    image: "/certs/python-besant.png",
+    link: "https://www.besanttechnologies.com/", // <--- UPDATE THIS
   },
 ];
 
