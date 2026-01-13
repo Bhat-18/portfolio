@@ -1,5 +1,5 @@
 // app/data.ts
-import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+
 
 export const hero = {
   name: "Bhanuprakash Bhat",
