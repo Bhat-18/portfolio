@@ -30,6 +30,7 @@ export const projects = [
     stack: ["Python", "GCP", "Docker", "OpenAI"],
     status: "Production",
     image: "/projects/inbox.png", // Ensure you have an image or remove this line to show preview text
+    video: null, // <--- ADDED THIS
     link: "https://github.com/Bhat-18/smart-inbox-router",
   },
   {
@@ -39,6 +40,7 @@ export const projects = [
     stack: ["LangChain", "LangGraph", "ChromaDB", "Python"],
     status: "Production",
     image: "/projects/RAG.png",
+    video: null, // <--- ADDED THIS
     link: "https://github.com/Bhat-18/auto-auditor-rag-agent",
   },
   {
@@ -48,6 +50,7 @@ export const projects = [
     stack: ["FastAPI", "TensorFlow", "Streamlit", "Python", "Docker"],
     status: "Production",
     image: "/projects/stock.png",
+    video: null, // <--- ADDED THIS
     // No image? It will show "Preview Loading" or you can add one later
     link: "https://github.com/Bhat-18/ASX-Real-time-Stock-Signal-Prediction-System-FastAPI-TensorFlow-Streamlit-",
   },
@@ -58,6 +61,7 @@ export const projects = [
     stack: ["Python", "Scikit-learn", "Streamlit", "Pandas"],
     status: "Completed",
     image: "/projects/retail.png",
+    video: null, // <--- ADDED THIS
     link: "https://github.com/Bhat-18/RetailBoost-Intelligent-Store-Sales-Forecasting-with-Explainable-Machine-Learning-and-Streamlit",
   },
   {
@@ -66,6 +70,8 @@ export const projects = [
     description: "Built a spatial data engineering pipeline using DuckDB to integrate national electricity and emissions datasets. Performed geocoding and schema normalization for high-performance spatial analysis.",
     stack: ["DuckDB", "Python", "SQL", "Matplotlib"],
     status: "Completed",
+    image: null,
+    video: null, // <--- ADDED THIS
     link: "https://github.com/Bhat-18",
   },
 ];
