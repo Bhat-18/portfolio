@@ -85,23 +85,23 @@ export const experience = [
     date: "May 2025 - Present",
     // Changed from 'description' string to 'points' array
     points: [
-      "Collaborate with Educational Designers and Unit Coordinators to maintain and optimize assessment data in the Sydney Curriculum system.",
-      "Use Akari cloud systems to automate data validation, consistency checks, and updates across unit outlines.",
-      "Evaluate course content to identify AI integration opportunities that improve learning and teaching outcomes.",
-      "Conduct quality assurance and feature testing for curriculum systems, ensuring compliance with university standards.",
-      "Stay current with AI in education, assessment design, and institutional technology practices."
+      "Supported the transition to AI-enabled learning systems by working across curriculum platforms, assessment data, and policy-aligned workflows.",
+      "Collaborated with Educational Designers to validate and govern assessment metadata within the Sydney Curriculum Management System.",
+      "Conducted assessment data quality audits, identifying structural inconsistencies and rule violations across unit outlines.",
+      "Contributed to change management and responsible AI adoption, supporting platform capability uplift and documentation."
     ],
   },
   {
     id: 2,
-    role: "Sales Assistant",
-    company: "David Jones Australia",
+    role: "Data Analyst",
+    company: "Clinic to Cloud",
     location: "Sydney, Australia",
-    date: "Oct 2024 - Aug 2025",
+    date: "Oct 2024 - Mar 2025",
     points: [
-      "Delivered exceptional customer service by understanding client needs and providing tailored product recommendations.",
-      "Collaborated with cross-functional teams to streamline visual merchandising and store layout strategies.",
-      "Contributed to retail performance reporting by gathering key sales metrics to optimize sales strategies aligned with customer behavior analytics."
+      "Supported the migration of patient and clinical operational data from on-premise systems to a secure cloud-based data platform.",
+      "Designed and implemented ETL pipelines to extract, clean, and load patient demographics and clinical interaction data.",
+      "Structured and optimized datasets for analytics-ready schemas, significantly improving data accessibility for reporting.",
+      "Developed interactive dashboards for clinicians to analyze patient visit trends and clinic performance metrics."
     ],
   },
   {
