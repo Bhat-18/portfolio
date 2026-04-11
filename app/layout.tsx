@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Bhanuprakash Bhat | Portfolio",
-  description: "Data Scientist & AI Engineer Portfolio",
+  description: "Cloud Data Engineer | AWS Certified AI Practitioner | Portfolio",
 };
 
 export default function RootLayout({

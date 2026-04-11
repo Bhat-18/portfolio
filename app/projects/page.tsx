@@ -95,7 +95,7 @@ export default function ProjectsPage() {
                                     </div>
 
                                     {/* RIGHT: Media */}
-                                    <div className="relative flex items-center justify-center min-h-[350px] md:h-full p-4 border-t md:border-t-0 md:border-l" style={{ backgroundColor: 'black', borderColor: 'var(--border-color)' }}>
+                                    <div className="relative flex items-center justify-center min-h-[350px] md:h-full p-4 border-t md:border-t-0 md:border-l" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-color)' }}>
                                         {project.video ? (
                                             <video
                                                 src={project.video}

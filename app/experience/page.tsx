@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 // FIX: Added FiExternalLink to the import list below
-import { FiArrowLeft, FiBriefcase, FiCalendar, FiMapPin, FiExternalLink } from "react-icons/fi";
+import { FiArrowLeft, FiBriefcase, FiMapPin, FiExternalLink } from "react-icons/fi";
 import { experience } from "../data";
 import Card3D from "../components/Card3D";
 
@@ -32,7 +32,7 @@ export default function ExperiencePage() {
                         Professional <span style={{ color: 'var(--accent-primary)' }}>Experience</span>
                     </motion.h1>
                     <p className="text-xl max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
-                        A detailed timeline of my career journey, highlighting impactful projects and key contributions in AI, Data Science, and Engineering.
+                        A detailed timeline of my career journey, highlighting impactful projects and key contributions in Cloud Data Engineering, AI, and Data Science.
                     </p>
                 </div>
 

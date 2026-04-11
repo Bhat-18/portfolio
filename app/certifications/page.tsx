@@ -49,7 +49,7 @@ export default function CertificationsPage() {
                             <Card3D className="border rounded-2xl overflow-hidden h-full flex flex-col transition duration-500 group hover:shadow-blue-500/10" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-color)' }}>
 
                                 {/* Image Area */}
-                                <div className="relative h-[220px] w-full border-b p-6 flex items-center justify-center" style={{ backgroundColor: 'black', borderColor: 'var(--border-color)' }}>
+                                <div className="relative h-[220px] w-full border-b p-6 flex items-center justify-center" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border-color)' }}>
                                     {cert.image ? (
                                         <Image
                                             src={cert.image}

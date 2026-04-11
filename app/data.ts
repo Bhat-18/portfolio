@@ -3,8 +3,8 @@
 
 export const hero = {
   name: "Bhanuprakash Bhat",
-  title: "Data Scientist & AI Engineer",
-  text: "I build production AI that drives ROI. Recently architected a Serverless GCP Agent saving ~$10.6k/year and I deploy scalable RAG & MLOps pipelines.",
+  title: "Cloud Data Engineer",
+  text: "3x Cloud-Certified Data Engineer with hands-on experience designing production-grade data pipelines and ML systems across GCP, Azure, and AWS. From serverless cloud pipelines to autonomous AI agents — delivering measurable business impact.",
   avatar: "/avatar.jpg",
 };
 
@@ -79,41 +79,53 @@ export const projects = [
 export const experience = [
   {
     id: 1,
-    role: "Assessment & AI Transition Assistant",
-    company: "The University of Sydney",
-    location: "Sydney, Australia", // New Field
-    date: "May 2025 - Present",
-    // Changed from 'description' string to 'points' array
+    role: "Cloud Data Engineer",
+    company: "Demografy",
+    location: "Sydney, Australia",
+    date: "Jan 2026 - Present",
     points: [
-      "Supported the transition to AI-enabled learning systems by working across curriculum platforms, assessment data, and policy-aligned workflows.",
-      "Collaborated with Educational Designers to validate and govern assessment metadata within the Sydney Curriculum Management System.",
-      "Conducted assessment data quality audits, identifying structural inconsistencies and rule violations across unit outlines.",
-      "Contributed to change management and responsible AI adoption, supporting platform capability uplift and documentation."
+      "Designed and implemented scalable data pipelines integrating Google Places API with authentication, smart caching, and cost monitoring, reducing API overhead and optimizing cloud resource usage.",
+      "Built cloud-native database architecture on Supabase and PostgreSQL, designing schemas for raw JSON ingestion and suburb-level real estate metrics with indexing strategies for high-performance geospatial lookups.",
+      "Developed modular dbt Core transformation models (staging, intermediate, and mart layers) to convert raw API data into analytics-ready datasets, enabling real-time metric computation and BI reporting.",
+      "Deployed and maintained cloud-hosted data applications using Streamlit, implementing CI/CD-ready workflows and backend integration with sub-15-second processing time."
     ],
   },
   {
     id: 2,
-    role: "Data Analyst",
-    company: "Clinic to Cloud",
+    role: "Assessment & AI Transition Assistant",
+    company: "The University of Sydney",
     location: "Sydney, Australia",
-    date: "Oct 2024 - Mar 2025",
+    date: "May 2025",
     points: [
-      "Supported the migration of patient and clinical operational data from on-premise systems to a secure cloud-based data platform.",
-      "Designed and implemented ETL pipelines to extract, clean, and load patient demographics and clinical interaction data.",
-      "Structured and optimized datasets for analytics-ready schemas, significantly improving data accessibility for reporting.",
-      "Developed interactive dashboards for clinicians to analyze patient visit trends and clinic performance metrics."
+      "Supported enterprise-wide transition to AI-enabled assessment systems, collaborating with Educational Designers and Unit Coordinators across curriculum platforms and policy-aligned workflows.",
+      "Validated, standardised, and governed assessment metadata within the Sydney Curriculum Management System, ensuring data integrity, schema consistency, and policy compliance.",
+      "Conducted assessment data quality audits, identifying structural inconsistencies, rule violations, and dependency issues across hundreds of unit outlines.",
+      "Contributed to responsible AI adoption and change management, supporting evaluation of emerging EdTech platforms and workflow automation capabilities."
     ],
   },
   {
     id: 3,
+    role: "Data Engineer",
+    company: "Clinic to Cloud",
+    location: "Sydney, Australia",
+    date: "Oct 2024 - Mar 2025",
+    points: [
+      "Migrated patient records from on-premise clinical systems to Azure by designing end-to-end data pipelines using Azure Data Factory (ADF), landing raw CSV exports in Blob Storage and structuring a medallion architecture (bronze/silver/gold) in ADLS Gen2, reducing manual data handling by 80%.",
+      "Built and optimised ETL workflows in Azure Synapse Analytics using dedicated SQL pools and PySpark-based Spark pools for data cleansing, deduplication, and transformation of patient demographics, visit histories, and clinical interaction data.",
+      "Consolidated transformed datasets into a Microsoft Fabric Lakehouse using notebooks and Dataflows Gen2, creating a unified analytics layer that replaced fragmented spreadsheet-based reporting.",
+      "Developed interactive Power BI dashboards connected to the Fabric Lakehouse for clinicians and operational staff, enabling real-time trend analysis of patient visits and clinic performance metrics."
+    ],
+  },
+  {
+    id: 4,
     role: "Data Analyst Intern",
     company: "Moog Inc",
     location: "Bengaluru, India",
     date: "Jan 2024 - May 2024",
     points: [
-      "Designed and deployed dynamic Power BI dashboards to visualize critical sensor data (pressure, temperature, density).",
-      "Processed and cleaned large datasets using Pandas and NumPy, ensuring high data integrity for analysis.",
-      "Conducted exploratory data analysis (EDA) using Matplotlib and Seaborn to uncover hidden insights and detect anomalies in aerospace components."
+      "Designed and deployed dynamic Power BI dashboards to visualize critical sensor data (pressure, temperature, and density), enabling engineers and managers to track real-time trends and optimize system performance.",
+      "Processed and cleaned large datasets using Pandas and NumPy, ensuring high data integrity before feeding into visualization pipelines and statistical analysis.",
+      "Conducted exploratory data analysis (EDA) using Matplotlib and Seaborn to uncover hidden insights in system behavior, supporting early detection of anomalies in aerospace components."
     ],
   },
 ];

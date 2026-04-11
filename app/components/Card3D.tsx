@@ -21,8 +21,8 @@ export default function Card3D({ children, className, style }: { children: React
 
       {/* The Content Container - Added better border and background */}
       <div
-        className={`relative h-full rounded-2xl border border-white/10 shadow-xl overflow-hidden ${className}`}
-        style={{ backgroundColor: '#050505', ...style }}
+        className={`relative h-full rounded-2xl border shadow-xl overflow-hidden ${className}`}
+        style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-color)', ...style }}
       >
         {children}
       </div>
